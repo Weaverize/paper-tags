@@ -73,7 +73,7 @@ Custom property | Description | Default
     </style>
     <!-- this div fulfills an a11y requirement for combobox, do not remove -->
     <div role="button"></div>
-    <paper-menu-button id="menuButton" vertical-align="[[verticalAlign]]" horizontal-align="[[horizontalAlign]]" vertical-offset="[[_computeMenuVerticalOffset(noLabelFloat)]]" disabled="[[disabled]]" no-animations="[[noAnimations]]" opened="{{opened}}">
+    <paper-menu-button id="menuButton" vertical-align="[[verticalAlign]]" horizontal-align="[[horizontalAlign]]" horizontal-offset="[[horizontalOffset]]" vertical-offset="[[_computeMenuVerticalOffset(noLabelFloat, verticalOffset)]]" disabled="[[disabled]]" no-animations="[[noAnimations]]" opened="{{opened}}">
       <div class="dropdown-trigger">
         <paper-ripple></paper-ripple>
         <!-- paper-input has type="text" for a11y, do not remove -->
@@ -267,12 +267,12 @@ Custom property | Description | Default
         },
 
         /**
-         * The orientation against which to align the menu dropdown
-         * horizontally relative to the dropdown trigger.
+         * Horizontal offset of the dropdown menu relative to the 
+         * dropdown trigger.
          */
-        horizontalAlign: {
-          type: String,
-          value: 'right'
+        horizontalOffset: {
+          type: Number,
+          value: 0,
         },
 
         /**
@@ -282,6 +282,15 @@ Custom property | Description | Default
         verticalAlign: {
           type: String,
           value: 'top'
+        },
+
+        /**
+         * Vertical offset of the dropdown menu relative to the 
+         * dropdown trigger.
+         */
+        verticalOffset: {
+          type: Number,
+          value: 0,
         }
       },
 
@@ -481,7 +490,13 @@ Custom property | Description | Default
         // derived from the metrics of elements internal to `paper-input`'s
         // template. The metrics will change depending on whether or not the
         // input has a floating label.
-        return noLabelFloat ? -4 : 8;
+        // If there is a vertical offset defined, that number will be
+        // returned instead.
+        if (this.verticalOffset) {
+          return this.verticalOffset;
+        } else {
+          return noLabelFloat ? -4 : 8;  
+        }
       },
 
       /**
