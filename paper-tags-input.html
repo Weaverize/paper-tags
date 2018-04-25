@@ -171,6 +171,10 @@ Polymer({
     this.splice('items', this.items.length - 1);
   },
 
+  removeAll: function() {
+    this.splice("items", 0);
+  },
+
   removeTag: function(tag) {
     var position = this.items.indexOf(tag);
     if(position > -1) {
