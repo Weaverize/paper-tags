@@ -138,7 +138,7 @@ class PaperTagsInput extends PaperTagsMixin(Polymer.Element) {
 	  }
 	}
 	static get observers() {
-    return [
+    	return [
 		  '_observeTagItemsInit(items)',
 		  '_observeTagItems(items.splices)'
 		]
@@ -167,19 +167,19 @@ class PaperTagsInput extends PaperTagsMixin(Polymer.Element) {
 	}
 	
 	_removeLast() {
-    this.splice('items', this.items.length - 1);
+    	this.splice('items', this.items.length - 1);
 	}
 	
-  removeAll () {
-    this.splice("items", 0);
-  }
+  	removeAll () {
+    	this.splice("items", 0);
+  	}
 
-  removeTag (tag) {
-    var position = this.items.indexOf(tag);
-    if(position > -1) {
-      this.splice('items', position, 1 );
-    }
-  },
+  	removeTag (tag) {
+    	var position = this.items.indexOf(tag);
+    	if(position > -1) {
+      		this.splice('items', position, 1 );
+    	}
+  	}
 
 	findTag(tag) {
 	  return this.items.includes(tag);
@@ -219,7 +219,7 @@ class PaperTagsInput extends PaperTagsMixin(Polymer.Element) {
 	/**
 	 * Returns a reference to the focusable element.
 	 */
-	get _focusableElement() {
+	get_focusableElement() {
 	  return this.$.tagInput.inputElement;
 	}
 
